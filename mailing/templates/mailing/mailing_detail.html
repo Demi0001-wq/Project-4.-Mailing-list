@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Mailing Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Message:</strong> {{ object.message.subject }}</p>
+            <p><strong>Status:</strong> {{ object.get_status_display }}</p>
+            <p><strong>Period:</strong> {{ object.get_period_display }}</p>
+            <p><strong>Start Time:</strong> {{ object.start_time }}</p>
+
+            <h4>Recipients:</h4>
+            <ul>
+                {% for recipient in object.recipients.all %}
+                <li>{{ recipient.full_name }} ({{ recipient.email }})</li>
+                {% endfor %}
+            </ul>
+
+            <div class="actions mt-3">
+                <a href="{% url 'mailing:send_now' object.pk %}" class="btn btn-warning">Send Now</a>
+                <a href="{% url 'mailing:edit' object.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'mailing:list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

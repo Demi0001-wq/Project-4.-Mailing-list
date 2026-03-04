@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Mailings</h5>
+                    <p class="card-text h2">{{ total_mailings }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Active Mailings</h5>
+                    <p class="card-text h2">{{ active_mailings }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Unique Recipients</h5>
+                    <p class="card-text h2">{{ unique_recipients }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Welcome to Mailing Service</h3>
+            <p>Use the navigation above to manage your messages, recipients, and mailing campaigns.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header-actions">
+        <h2>My Mailings</h2>
+        <a href="{% url 'mailing:create' %}" class="btn btn-primary">Create New Mailing</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Period</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.message.subject }}</td>
+                <td><span class="badge badge-{{ object.status }}">{{ object.get_status_display }}</span></td>
+                <td>{{ object.get_period_display }}</td>
+                <td>
+                    <a href="{% url 'mailing:view' object.pk %}" class="btn btn-sm">View</a>
+                    <a href="{% url 'mailing:edit' object.pk %}" class="btn btn-sm">Edit</a>
+                    <a href="{% url 'mailing:delete' object.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No mailings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
