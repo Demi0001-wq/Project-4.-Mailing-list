@@ -1,5 +1,9 @@
 from .apps import UsersConfig
-from .views import UserLoginView, UserLogoutView, UserRegisterView, UserConfirmView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from .views import (
+    UserLoginView, UserLogoutView, UserRegisterView, UserConfirmView, 
+    PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView,
+    UserDetailView, UserUpdateView
+)
 from django.urls import path, reverse_lazy
 
 app_name = UsersConfig.name
