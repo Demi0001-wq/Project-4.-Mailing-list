@@ -1,6 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.views.generic import CreateView, View, DetailView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
