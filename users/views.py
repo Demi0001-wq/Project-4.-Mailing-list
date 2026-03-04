@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from django.views.generic import CreateView, View
+from django.views.generic import CreateView, View, DetailView, UpdateView
 from django.urls import reverse_lazy
 from .models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -39,6 +39,22 @@ class UserConfirmView(View):
         user.token = None
         user.save()
         return redirect('users:login')
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'users/user_detail.html'
+
+    def get_object(self):
+        return self.request.user
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ('email', 'avatar', 'phone', 'country')
+    template_name = 'users/user_form.html'
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self):
+        return self.request.user
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'

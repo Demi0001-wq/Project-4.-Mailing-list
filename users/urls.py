@@ -9,6 +9,8 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout'),
     path('register/', UserRegisterView.as_view(), name='register'),
     path('confirm/<str:token>/', UserConfirmView.as_view(), name='confirm'),
+    path('profile/', UserDetailView.as_view(), name='profile'),
+    path('profile/edit/', UserUpdateView.as_view(), name='edit'),
     
     path('password_reset/', PasswordResetView.as_view(template_name='users/password_reset.html', success_url=reverse_lazy('users:password_reset_done')), name='password_reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),

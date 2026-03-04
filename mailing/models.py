@@ -16,6 +16,9 @@ class Recipient(models.Model):
     class Meta:
         verbose_name = 'Recipient'
         verbose_name_plural = 'Recipients'
+        permissions = [
+            ('view_any_recipient', 'Can view any recipient'),
+        ]
 
 
 class Message(models.Model):
@@ -30,6 +33,9 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'Message'
         verbose_name_plural = 'Messages'
+        permissions = [
+            ('view_any_message', 'Can view any message'),
+        ]
 
 
 class Mailing(models.Model):
@@ -58,9 +64,21 @@ class Mailing(models.Model):
     def __str__(self):
         return f"Mailing {self.id} ({self.status})"
 
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        from django.utils import timezone
+        if self.start_time < timezone.now():
+            raise ValidationError('Start time cannot be in the past.')
+        if self.end_time and self.end_time <= self.start_time:
+            raise ValidationError('End time must be after start time.')
+
     class Meta:
         verbose_name = 'Mailing'
         verbose_name_plural = 'Mailings'
+        permissions = [
+            ('set_mailing_status', 'Can set mailing status'),
+            ('view_any_mailing', 'Can view any mailing'),
+        ]
 
 
 class MailingLog(models.Model):

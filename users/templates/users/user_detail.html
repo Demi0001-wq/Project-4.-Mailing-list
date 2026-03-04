@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3>My Profile</h3>
+        </div>
+        <div class="card-body">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Avatar" class="img-thumbnail mb-3" style="max-height: 200px;">
+            {% endif %}
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.phone|default:"Not provided" }}</p>
+            <p><strong>Country:</strong> {{ user.country|default:"Not provided" }}</p>
+
+            <div class="mt-4">
+                <a href="{% url 'users:edit' %}" class="btn btn-primary">Edit Profile</a>
+                <a href="{% url 'mailing:home' %}" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
